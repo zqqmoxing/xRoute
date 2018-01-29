@@ -12,7 +12,7 @@ const extractSass = new ExtractTextPlugin({
 module.exports = {
     devtool: 'eval-source-map',
     entry:  {
-        app:__dirname + "/app/main.js",
+        app:__dirname + "/src/main.js",
         // 第三方库(vendor) 入口
         // vendors:['art-template']
     },//已多次提及的唯一入口文件
@@ -72,7 +72,7 @@ module.exports = {
     plugins: [
         extractSass,
         new HtmlWebpackPlugin({
-            template: __dirname + "/app/tpl/index.tpl.html"//new 一个这个插件的实例，并传入相关的参数
+            template: __dirname + "/src/index.html"//new 一个这个插件的实例，并传入相关的参数
         }),
         new webpack.HotModuleReplacementPlugin(),//热加载
         new CleanWebpackPlugin(['build/bundle-*.js'], {
@@ -94,9 +94,9 @@ module.exports = {
     resolve: {
         // 创建 import 或 require 的别名
         alias:{
-            'scss':path.resolve(__dirname,'./app/scss'),
-            'plugins':path.resolve(__dirname,'./app/plugins'),
-            'art-tpl':path.resolve(__dirname,'./app/art-tpl'),
+            'scss':path.resolve(__dirname,'./src/common/scss'),
+            'plugins':path.resolve(__dirname,'./src/plugins'),
+            'tpl':path.resolve(__dirname,'./src/common/tpl'),
         }
     }
 }
