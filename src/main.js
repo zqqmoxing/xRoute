@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import $ from 'plugins/jquery/jquery-vendor.js';
 import {Route} from 'plugins/Router/router.js';
 import 'scss/common.scss';
 
