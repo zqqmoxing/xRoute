@@ -9,7 +9,7 @@ const extractSass = new ExtractTextPlugin({
 });// css打包成一个文件
 
 // 引入多页面文件列表
-const { HTMLDirs } = require("./src/common/js/config");
+// const { HTMLDirs } = require("./src/common/js/config");
 // 通过 html-webpack-plugin 生成的 HTML 集合
 let HTMLPlugins = [];
 // // 入口文件集合
@@ -17,15 +17,15 @@ let Entries = {};
 // console.log(HTMLDirs)
 //
 // 生成多页面的集合，自动生成 HTML 文件，并自动引用打包后的 JavaScript 文件
-HTMLDirs.forEach((page) => {
-    const htmlPlugin = new HtmlWebpackPlugin({
-        filename: `${page}.html`,
-        template: path.resolve(__dirname, `src/view/${page}.html`),
-        chunks: [page, 'commons'],//引入的js
-    });
-    HTMLPlugins.push(htmlPlugin);
-    Entries[page] = path.resolve(__dirname, `src/common/js/${page}.js`);
-});
+// HTMLDirs.forEach((page) => {
+//     const htmlPlugin = new HtmlWebpackPlugin({
+//         filename: `${page}.html`,
+//         template: path.resolve(__dirname, `src/view/${page}.html`),
+//         chunks: [page, 'commons'],//引入的js
+//     });
+//     HTMLPlugins.push(htmlPlugin);
+//     Entries[page] = path.resolve(__dirname, `src/common/js/${page}.js`);
+// });
 
 // 合并数组
 let plugins = [
@@ -46,7 +46,7 @@ let plugins = [
         minChunks: 4,
     }),
 ];
-let pluginsAll = plugins.concat(HTMLPlugins);
+// let pluginsAll = plugins.concat(HTMLPlugins);
 
 module.exports = {
     devtool: 'eval-source-map',//调试工具
@@ -55,7 +55,7 @@ module.exports = {
     //     // 第三方库(vendor) 入口
     //     // vendors:['art-template']
     // },//已多次提及的唯一入口文件
-    entry:Entries,
+    entry:path.resolve(__dirname, `src/main.js`),
     output: {
         path: __dirname + "/build",//打包后的文件存放的地方
         filename: "js/[name].bundle.js",//打包后输出文件的文件名
@@ -122,7 +122,7 @@ module.exports = {
             }
         ],
     },
-    plugins: pluginsAll,
+    plugins: plugins,
     // 配置模块如何解析。
     resolve: {
         // 创建 import 或 require 的别名
